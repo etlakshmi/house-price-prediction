@@ -73,9 +73,10 @@ def predict_from_user_input(model,user_input,feature_columns,encoders,mean_value
     df=pd.DataFrame([user_input])
     for col, le in encoders.items():
         if col in df.columns:
-            df[col]=le.transform(df[col].astype(str))
-        else:
-            df[col]=0
+            value=df[col].astype(str)
+            df[col] = value.apply(
+                lambda x: le.transform([x])[0] if x in le.classes_ else -1
+            )
     for col, mean in mean_values.items():
         if col not in df.columns:
             df[col]=mean
