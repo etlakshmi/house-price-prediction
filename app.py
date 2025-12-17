@@ -72,7 +72,10 @@ if uploaded_file is not None:
 
     user_input = {}
     for col in feature_columns:
-        user_input[col] = st.number_input(f"{col}", value=0.0)
+        if col in encoders:
+            user_input[col] = st.selectbox(col,options=encoders[col].classes_.tolist())
+    else:
+        user_input[col] = st.number_input(col, value=0.0)
 
     # Predict button
     if st.button("Predict House Price"):
