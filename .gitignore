@@ -1,0 +1,9 @@
+__pycache__
+.ipynb_checkpoints
+.snapshots
+.venv
+Models
+notebooks
+House_Price_Prediction.ipynb
+housing.ipynb
+Submission.csv
